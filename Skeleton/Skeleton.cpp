@@ -268,27 +268,27 @@ class Scene {
 	vec3 La;
 public:
 	void build() {
-		vec3 eye = vec3(50, 0, 0), vup = vec3(0, 0, 1), lookat = vec3(0, 0, -6);
+		vec3 eye = vec3(5, 0, 0), vup = vec3(0, 0, 1), lookat = vec3(0, 0, 0);
 		float fov = 45 * (float)M_PI / 180;
 		camera.set(eye, lookat, vup, fov);
 
-		La = vec3(0.6, 0.6, 0.6);
-		lights.push_back(new Light(vec3(5, 0, 2), vec3(500, 500, 500)));
-
+		La = vec3(0.4, 0.4, 0.4);
+		lights.push_back(new Light(vec3(0.0, -0.8f, -0.2f), vec3(50, 50, 50)));
+		lights.push_back(new Light(vec3(-5, 0, 2), vec3(100, 100, 100)));
 		camera.move(12);
 
 		Material* gold = new ReflectiveMaterial(vec3(0.17f, 0.35f, 1.5f), vec3(3.1f, 2.7f, 1.9f));
-		float focus_1 = 6.0f;
-		float focus_2 = -6.0f;
-		float heightStart_1 = -10.0f;
+		float focus_1 = 0.6f;
+		float focus_2 = -0.6f;
+		float heightStart_1 = -0.6f;
 		float heightEnd_1 = 0.0f;
 		objects.push_back(new Paraboloid(gold, focus_2, focus_1, heightStart_1, heightEnd_1));
 		float heightStart_2 = heightEnd_1;
-		float heightEnd_2 = 5.5f;
-		//objects.push_back(new Paraboloid(gold, focus_1, focus_2, heightStart_2, heightEnd_2));
+		float heightEnd_2 = 0.57f;
+		objects.push_back(new Paraboloid(gold, focus_1, focus_2, heightStart_2, heightEnd_2));
 
 		Material* dodeMat = new RoughMaterial(vec3(0.1, 0.3, 0.1), vec3(2, 2, 2), 20);
-		Platon* dodecahedron = new Platon(dodeMat, 0.8, focus_2 + 2.0f);
+		Platon* dodecahedron = new Platon(dodeMat, 0.05, focus_2 + 0.2f);
 		dodecahedron->points = {
 			{1, 1, 1},
 			{1, 1, -1},
@@ -329,7 +329,7 @@ public:
 		objects.push_back(dodecahedron);
 
 		Material* roomMat = new RoughMaterial(vec3(0.3f, 0.2f, 0.1f), vec3(2, 2, 2), 20);
-		Platon* tetrahedron = new Platon(roomMat, 80, 0.0f);
+		Platon* tetrahedron = new Platon(roomMat, 15, 0.0f);
 		tetrahedron->points = {
 			{ 1.0,  1.0,  1.0 },
 			{ -1.0,  1.0, -1.0 },
